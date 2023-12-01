@@ -1,7 +1,7 @@
 import React from 'react'
 import { BASE_URL } from '../../axios/baseURL'
 import { toast,ToastContainer } from "react-toastify";
-import { addToCartSubmitAPI } from '../../axios/allAPI/userAPI';
+import { addToCartSubmitAPI,addToWishListSubmitAPI} from '../../axios/allAPI/userAPI';
 
 
 
@@ -32,6 +32,36 @@ function CardForAllProducts(product) {
      }
   }
 
+
+
+  const addToWishListSubmit=async(productId)=>{
+
+
+    const usertoken=sessionStorage.getItem("usertoken")
+    if(usertoken){
+         const reqBody={
+           productId:productId
+         }  
+
+         const reqHeader={
+           "Content-Type":"application/json",
+            "Authorization":`Bearer ${usertoken}`
+         }
+       const result=await addToWishListSubmitAPI(reqBody,reqHeader) 
+       if(result.status===200){
+         toast.warning(result.data)
+       }else{
+         toast.warning(result.response.data)
+       }
+       
+    }else{
+        toast.warning("Please Login")
+    }
+
+
+
+  }
+
   return (
     <>
 
@@ -43,10 +73,10 @@ function CardForAllProducts(product) {
 
   product?.product?.uploadimages[0]?   <div className='relative max-h-[50%] min-h-[50%] rounded-lg  '>
   <img className='absolute max-h-full min-h-full w-full rounded-lg ' src={`${BASE_URL}/images/${product?.product?.uploadimages[0]}`}></img>
-  <div className='absolute left-[5%] top-[5%] opacity-0 text-red-500 bg-slate-100 rounded-full h-[10%] flex justify-center items-center w-[10%] group-hover:opacity-100 group-hover:duration-1000 hover:cursor-pointer'><i class="fa-solid fa-heart text-xl"></i></div>
+  <div onClick={()=>addToWishListSubmit(product?.product?._id)} className='absolute left-[5%] top-[5%] opacity-0 text-red-500 bg-slate-100 rounded-full h-[10%] flex justify-center items-center w-[10%] group-hover:opacity-100 group-hover:duration-1000 hover:cursor-pointer'><i class="fa-solid fa-heart text-xl"></i></div>
   <button onClick={()=>addToCartSubmit(product?.product?._id)} className='absolute bottom-0 translate-y-10  bg-slate-100  h-[20%] w-full opacity-0 text-slate-500 group-hover:translate-y-0 duration-200 group-hover:opacity-100 hover:bg-slate-300 text-xl font-semibold ' >Add To Cart</button>
   </div>:  <div className='relative max-h-[50%] min-h-[50%] rounded-lg  bg-center bg-cover bg-[url("https://www.silicon.fr/wp-content/uploads/2015/12/apple-684x513.jpg")]'>
-  <div className='absolute left-[5%] top-[5%] opacity-0 text-red-500 bg-slate-100 rounded-full h-[10%] flex justify-center items-center w-[10%] group-hover:opacity-100 group-hover:duration-1000 hover:cursor-pointer'><i class="fa-solid fa-heart text-xl"></i></div>
+  <div onClick={()=>addToWishListSubmit(product?.product?._id)} className='absolute left-[5%] top-[5%] opacity-0 text-red-500 bg-slate-100 rounded-full h-[10%] flex justify-center items-center w-[10%] group-hover:opacity-100 group-hover:duration-1000 hover:cursor-pointer'><i class="fa-solid fa-heart text-xl"></i></div>
   <button onClick={()=>addToCartSubmit(product?.product?._id)} className='absolute bottom-0 translate-y-10  bg-slate-100  h-[20%] w-full opacity-0 text-slate-500 group-hover:translate-y-0 duration-200 group-hover:opacity-100 hover:bg-slate-300 text-xl font-semibold ' >Add To Cart</button>
   </div>
 

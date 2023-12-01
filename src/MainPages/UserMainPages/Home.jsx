@@ -17,7 +17,7 @@ function Home() {
 
                 <div>
 
-                    <div className='rijo h-screen lg:bg-no-repeat lg:bg-cover flex flex-col w-full bg-[url("https://static.itavisen.no/wp-content/uploads/2023/08/Screenshot-2023-08-15-at-20.14.57.png")] lg:hover:scale-[1.05] duration-1000'>
+                    <div className='rijo h-screen min-h-full lg:bg-no-repeat lg:bg-cover flex flex-col w-full bg-[url("https://static.itavisen.no/wp-content/uploads/2023/08/Screenshot-2023-08-15-at-20.14.57.png")] lg:hover:scale-[1.05] duration-1000'>
                         <div className='w-full h-auto grid mt-72 lg:grid-cols-2 '>
                             <div className='text-center lg:hover:scale-[1.1] hover:skew-x-12 duration-1000'>
                                 <span className='font-Lobster text-9xl text-white'>Apple Store</span>

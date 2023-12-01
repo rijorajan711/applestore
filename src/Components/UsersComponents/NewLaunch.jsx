@@ -1,93 +1,75 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { userGetAllTrendingProductAPI } from '../../axios/allAPI/userAPI'
+import { ToastContainer,toast } from 'react-toastify'
+import { BASE_URL } from '../../axios/baseURL'
+
 
 function NewLaunch() {
+
+         const [trendingProductDataFromDB,setTrendingProductDataFromDB]=useState([])
+         const [imageCount,setImageCount]=useState(0)
+
+        const getAllTrendingProduct=async()=>{
+            const result=await userGetAllTrendingProductAPI()
+            if(result.status===200){
+                // console.log("all data from ADminProduct.jsx",result.data)
+                setTrendingProductDataFromDB(result.data)
+            }else{
+                 toast.warning(result.response.data)
+            }
+
+        }
+    const incrementImageCount=()=>{
+        if(imageCount>1){
+            document.getElementById("incrementImageCount").classList.add("dissabled")
+        }else{
+
+            setImageCount(prev=>prev+1)
+        }
+    }
+
+    const decrementImageCount=()=>{
+
+        if(imageCount==0){
+            document.getElementById("decrementImageCount").classList.add("dissabled")
+        }else{
+            document.getElementById("decrementImageCount").classList.remove("dissabled")
+            setImageCount(prev=>prev-1)
+        }
+
+    }
+
+        useEffect(()=>{
+             getAllTrendingProduct()
+        },[])
+
+        console.log("newwwwwwwwwwwww Launch product",trendingProductDataFromDB)
+      
     return (
         <div className='flex flex-col justify-center items-center w-full'>
-            <div className='w-full h-28 mt-16 lg:mt-10  text-slate-400 font-Lobster text-9xl flex  justify-center items-center' > NeW Launch </div>
+            <div className='w-full h-28 mt-16 lg:mt-10  text-slate-40 font-Lobster text-9xl flex  justify-center items-center' > NeW Launch </div>
 
-            <div className=' w-full flex-shrink mt-28 m-10 flex flex-wrap gap-8 justify-center '>
-                <div className='group h-[500px] w-[300px] flex gap-5 flex-col bg-slate-100 rounded-lg shadow-2xl hover:scale-[1.01] duration-700'>
+           <div className='relative mt-24 lg:mt-8 w-full h-[450px] '> 
+           <i id='decrementImageCount' onClick={decrementImageCount} class="absolute top-[50%] text-6xl text-orange-200 left-3 fa-solid fa-left-long fa-beat"></i>
+           <img  src={`${BASE_URL}/images/${trendingProductDataFromDB[imageCount]?.uploadimages[0]}`} className='w-[100%]  z-10 h-[100%]'></img>
+             <i id='incrementImageCount' onClick={incrementImageCount} class="absolute top-[50%] text-6xl text-orange-200 right-3 fa-solid fa-right-long fa-beat"></i>
+           <div>
+            <span className='absolute top-0 font-thridStyle text-slate-700 left text-5xl z-50'>{trendingProductDataFromDB[imageCount]?.title}</span>
+           </div>
+           </div>
 
-                    <div className='relative h-[65%] rounded-lg  bg-center bg-cover bg-[url("https://external-preview.redd.it/apple-iphone-15-pro-max-has-three-new-and-main-features-v0-VTeRGhUFAAqyVYHnP6_apB3oQhZakB6dUVAjaWTaUBI.jpg?auto=webp&s=ddb7cf82b23baacdb900f5d116482880658a0959")]'>
-
-                        <div className='absolute left-[5%] top-[5%] opacity-0 text-red-500 bg-slate-100 rounded-full h-[10%] flex justify-center items-center w-[10%] group-hover:opacity-100 group-hover:duration-1000 hover:cursor-pointer'><i class="fa-solid fa-heart text-xl"></i></div>
-                        <button className='absolute bottom-0 translate-y-10  bg-slate-100  h-[10%] w-full opacity-0 text-slate-500 group-hover:translate-y-0 duration-200 group-hover:opacity-100 hover:bg-slate-300 text-xl font-semibold ' >Add To Cart</button>
-
-                    </div>
-                    <div className='flex flex-col gap-3'>
-
-                        <span className='pl-2 font-thridStyle text-2xl'>iPhone 15 Pro</span>
-                        <span className='font-light text-lg'>15.5 cm (6.1-inch) display¹</span>
-                        <span className='font-light text-lg'>15.5 cm (6.1-inch) display¹</span>
-                        <span className='pl-4 font-bold text-lg '>₹ 1,34,900</span>
-                    </div>
-
-                </div>
-
-
-                <div className='group h-[500px] w-[300px] flex gap-5 flex-col bg-slate-100 rounded-lg shadow-2xl hover:scale-[1.01] duration-700'>
-
-                    <div className='relative h-[65%]  bg-center bg-cover rounded-lg bg-[url("https://external-preview.redd.it/apple-iphone-15-pro-max-has-three-new-and-main-features-v0-VTeRGhUFAAqyVYHnP6_apB3oQhZakB6dUVAjaWTaUBI.jpg?auto=webp&s=ddb7cf82b23baacdb900f5d116482880658a0959")]'>
-
-                        <div className='absolute left-[5%] top-[5%] opacity-0 text-red-500 bg-slate-100 rounded-full h-[10%] flex justify-center items-center w-[10%] group-hover:opacity-100 group-hover:duration-1000 hover:cursor-pointer'><i class="fa-solid fa-heart text-xl"></i></div>
-                        <button className='absolute bottom-0 translate-y-10  bg-slate-100  h-[10%] w-full opacity-0 text-slate-500 group-hover:translate-y-0 duration-200 group-hover:opacity-100 hover:bg-slate-300 text-xl font-semibold ' > Add To Cart</button>
-
-                    </div>
-                    <div className='flex flex-col gap-3'>
-
-                        <span className='pl-2 font-thridStyle text-2xl'>iPhone 15 Pro</span>
-                        <span className='font-light text-lg'>15.5 cm (6.1-inch) display¹</span>
-                        <span className='font-light text-lg'>15.5 cm (6.1-inch) display¹</span>
-                        <span className='pl-4 font-bold text-lg '>₹ 1,34,900</span>
-                    </div>
-
-                </div>
-
-
-                <div className='group h-[500px] w-[300px] flex gap-5 flex-col bg-slate-100 rounded-lg  shadow-2xl hover:scale-[1.01] duration-700'>
-
-                    <div className='relative h-[65%]  bg-center bg-cover rounded-lg bg-[url("https://external-preview.redd.it/apple-iphone-15-pro-max-has-three-new-and-main-features-v0-VTeRGhUFAAqyVYHnP6_apB3oQhZakB6dUVAjaWTaUBI.jpg?auto=webp&s=ddb7cf82b23baacdb900f5d116482880658a0959")]'>
-
-                        <div className='absolute left-[5%] top-[5%] opacity-0 text-red-500 bg-slate-100 rounded-full h-[10%] flex justify-center items-center w-[10%] group-hover:opacity-100 group-hover:duration-1000 hover:cursor-pointer'><i class="fa-solid fa-heart text-xl"></i></div>
-                        <button className='absolute bottom-0 translate-y-10  bg-slate-100  h-[10%] w-full opacity-0 text-slate-500 group-hover:translate-y-0 duration-200 group-hover:opacity-100 hover:bg-slate-300 text-xl font-semibold ' > Add To Cart</button>
-
-                    </div>
-                    <div className='flex flex-col gap-3'>
-
-                        <span className='pl-2 font-thridStyle text-2xl'>iPhone 15 Pro</span>
-                        <span className='font-light text-lg'>15.5 cm (6.1-inch) display¹</span>
-                        <span className='font-light text-lg'>15.5 cm (6.1-inch) display¹</span>
-                        <span className='pl-4 font-bold text-lg '>₹ 1,34,900</span>
-                    </div>
-
-                </div>
-
-
-                <div className='group h-[500px] w-[300px] flex gap-5 flex-col bg-slate-100 rounded-lg  shadow-2xl hover:scale-[1.01] duration-700'>
-
-                    <div className='relative h-[65%]  bg-center bg-cover rounded-lg bg-[url("https://external-preview.redd.it/apple-iphone-15-pro-max-has-three-new-and-main-features-v0-VTeRGhUFAAqyVYHnP6_apB3oQhZakB6dUVAjaWTaUBI.jpg?auto=webp&s=ddb7cf82b23baacdb900f5d116482880658a0959")]'>
-
-                        <div className='absolute left-[5%] top-[5%] opacity-0 text-red-500 bg-slate-100 rounded-full h-[10%] flex justify-center items-center w-[10%] group-hover:opacity-100 group-hover:duration-1000 hover:cursor-pointer'><i class="fa-solid fa-heart text-xl"></i></div>
-                        <button className='absolute bottom-0 translate-y-10  bg-slate-100  h-[10%] w-full opacity-0 text-slate-500 group-hover:translate-y-0 duration-200 group-hover:opacity-100 hover:bg-slate-300 text-xl font-semibold ' > Add To Cart</button>
-
-                    </div>
-                    <div className='flex flex-col gap-3'>
-
-                        <span className='pl-2 font-thridStyle text-2xl'>iPhone 15 Pro</span>
-                        <span className='font-light text-lg'>15.5 cm (6.1-inch) display¹</span>
-                        <span className='font-light text-lg'>15.5 cm (6.1-inch) display¹</span>
-                        <span className='pl-4 font-bold text-lg '>₹ 1,34,900</span>
-                    </div>
-
-                </div>
-
-
-            </div>
-
+           
             <Link to={"/viewallproducts/all"} className='w-[20%] h-24 mt-10'><button className=' bg-slate-400 font-Lobster text-white lg:text-5xl w-[100%] h-[100%] rounded-2xl hover:scale-[1.1] duration-1000'>More Products</button></Link>
-
+            <ToastContainer position="top-right" autoClose={2000} />
         </div>
+
+
+
+
+
+
+
 
 
 

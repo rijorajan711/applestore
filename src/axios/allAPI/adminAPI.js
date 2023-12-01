@@ -39,3 +39,26 @@ export const blockAndUnblockUserAPI=async(reqBody,reqHeader)=>{
 export const adminProductUpdationSubmitAPI=async(reqBody,reqHeader)=>{
       return await commonAPI("PUT",`${BASE_URL}/admin/adminProductUpdationSubmit`,reqBody,reqHeader)
 }
+
+
+export const adminAddTrendingProductAPI=async(reqBody,reqHeader)=>{
+
+      return await commonAPI("POST",`${BASE_URL}/admin/addtrndingproduct`,reqBody,reqHeader)
+}
+
+export const adminGetAllTrendingProductAPI=async()=>{
+      return await commonAPI("GET",`${BASE_URL}/admin/gettrendingproduct`,"","")
+}
+
+export const adminDeleteTrendingProductAPI=async(reqBody,reqHeader)=>{
+      return await commonAPI("DELETE",`${BASE_URL}/admin/deletetrendingproduct`,reqBody,reqHeader)
+
+}
+
+
+export const adminTrendingProductUpdationSubmitAPI=async(reqBody,reqHeader)=>{
+      return await commonAPI("PUT",`${BASE_URL}/admin/admintrendingproductupdationsubmit`,reqBody,reqHeader)
+}
+
+
+

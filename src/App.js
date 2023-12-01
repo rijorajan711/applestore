@@ -22,6 +22,11 @@ import { useEffect, useState } from 'react';
 
 import { useContext } from 'react';
 import { userLoginResponse } from './Context/CreateContext';
+import Adress from './MainPages/UserMainPages/Adress';
+import OrderPlacedSuccess from './MainPages/UserMainPages/OrderPlacedSuccess';
+import OrderView from './MainPages/UserMainPages/OrderView';
+import AdminAddTrendingProduct from './Components/AdminComponent/AdminAddTrendingProduct';
+import AdminTrendingProduct from './Components/AdminComponent/AdminTrendingProduct';
 
 
 
@@ -81,6 +86,9 @@ function App() {
                 <Route path='viewallproducts/:category' element={<ViewAllProducts />} />
                 <Route path='cart' element={userSession?<VIewCart />:<SignIn />} />
                 <Route path='wishlist' element={userSession?<Wishlist />:<SignIn />}></Route>
+                <Route path='address/:total' element={userSession?<Adress />:<SignIn />}></Route>
+                <Route path='orderplacedsuccess' element={userSession?<OrderPlacedSuccess/>:<SignIn />}/>
+                <Route path="orderview" element={userSession?<OrderView />:<SignIn />} />
                 <Route path='login' element={<SignIn />} />
                 <Route path='signin' element={<SignIn signin />} />
               </Routes>
@@ -99,6 +107,8 @@ function App() {
                       <Route path='allproduct' element={<AdminProduct />} />
                       <Route path='addproduct' element={<AdminAddProduct/>}/>
                       <Route path='viewuser' element={<AdminViewUser />} />
+                      <Route path='trendingaddproduct' element={<AdminAddTrendingProduct/>}/>
+                      <Route path='trendingallproduct' element={<AdminTrendingProduct />} />
                      </Routes>
                     </AdminlandingFun>
 

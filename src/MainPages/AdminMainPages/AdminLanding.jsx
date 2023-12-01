@@ -7,6 +7,11 @@ function AdminLanding() {
      document.getElementById('productMoreButton').classList.toggle("rotate-180")
   }
 
+  const handleTrendingProductMore=()=>{
+    document.getElementById('trendingProductMore').classList.toggle("hidden")
+    document.getElementById('trendingProductMoreButton').classList.toggle("rotate-180")
+ }
+
 
   const handleUserMore=()=>{
     document.getElementById('userMore').classList.toggle("hidden")
@@ -64,6 +69,24 @@ function AdminLanding() {
       <div id='userMore' className='flex flex-col hidden gap-3 m-5 duration-10000 '>
      
        <Link to={"/admin/landing/viewuser"}><h1 className='hover:bg-slate-200 w-full h-full'>Manage Users</h1></Link> 
+      </div>
+
+      </div>
+
+
+
+      <div className='group flex flex-col'>
+   <div className='flex items-center justify-between hover:cursor-pointer' onClick={handleTrendingProductMore} >
+           <div className='flex items-center '>
+          <i class="fa-brands fa-product-hunt text-lg text-gray-600"></i>
+          <div className='font-fourthStyle ml-2 text-xl'>Trending Products</div>    
+            </div> 
+            <i id='trendingProductMoreButton'  class="fa-solid  fa-chevron-down duration-1000"></i>
+           
+      </div>
+      <div id='trendingProductMore' className='flex flex-col hidden gap-3 m-5 duration-10000 '>
+        <Link to={"/admin/landing/trendingallproduct"}><h1 className='hover:bg-slate-200'>Trend All Product</h1></Link>
+        <Link to={"/admin/landing/trendingaddproduct"}><h1 className='hover:bg-slate-200 w-full h-full'>Add Trend Product</h1></Link>
       </div>
 
       </div>

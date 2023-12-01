@@ -58,7 +58,7 @@ const userGetcategoryProduct=async(filterKey)=>{
 
 
   
-  <div className='w-full h-28  text-slate-400 font-Lobster text-9xl flex  justify-center items-center' > All Products </div>
+  <div className='w-full h-28  text-slate-400 font-Lobster text-9xl flex  justify-center items-center' >Products </div>
   
   <div className='w-[100%] m-[5%] pt-36 lg:pt-0 flex justify-center lg:justify-start flex-wrap gap-5'>
 
