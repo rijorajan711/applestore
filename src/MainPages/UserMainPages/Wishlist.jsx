@@ -132,7 +132,7 @@ const addToCartSubmit=async(productId)=>{
 
                
     </tbody>
-</table>: <div><h1>sorry your wishlist is empty!!!!</h1></div>
+</table>: <div className="flex justify-center text-4xl text-gray-600 font-fourthStyle mt-10"><h1>sorry your wishlist is empty!!!!</h1></div>
   
 
 

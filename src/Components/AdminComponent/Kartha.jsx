@@ -2,7 +2,9 @@ import React from 'react'
 
 function Kartha() {
   return (
-    <div  className='w-full h-screen bg-red-800'>
+    <div  className='w-full h-screen bg-gray-300'>
+
+      
       
     </div>
   )

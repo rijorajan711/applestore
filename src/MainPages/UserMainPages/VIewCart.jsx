@@ -166,7 +166,7 @@ function VIewCart() {
               </tbody>
             </table>
           ) : (
-            <div>
+            <div className="flex justify-center text-4xl text-gray-600 font-fourthStyle">
               <h1>sorry your cart is empty!!!!</h1>
             </div>
           )}

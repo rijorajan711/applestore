@@ -12,8 +12,10 @@ export const userLoginAPI=async(reqBody)=>{
      return await commonAPI('POST',`${BASE_URL}/user/login`,reqBody,"")
 }
 
-export const userGetAllProductAPI=async()=>{
-    return await commonAPI("GET",`${BASE_URL}/user/getproduct`,"","")
+export const userGetAllProductAPI=async(searhKey)=>{
+
+   
+    return await commonAPI("GET",`${BASE_URL}/user/getproduct?search=${searhKey}`,"","")
 }
 
 export const userGetCategoryProductAPI=async(reqBody)=>{

@@ -1,6 +1,8 @@
 
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 //USER
 import Home from './MainPages/UserMainPages/Home'
 import HomeNavbar from './Components/UsersComponents/HomeNavbar';
@@ -9,6 +11,10 @@ import ViewAllProducts from './MainPages/UserMainPages/ViewAllProducts';
 import VIewCart from './MainPages/UserMainPages/VIewCart';
 import Wishlist from './MainPages/UserMainPages/Wishlist';
 import SignIn from './MainPages/UserMainPages/SignIn';
+import { userLoginResponse } from './Context/CreateContext';
+import OrderPlacedSuccess from './MainPages/UserMainPages/OrderPlacedSuccess';
+import OrderView from './MainPages/UserMainPages/OrderView';
+import Adress from './MainPages/UserMainPages/Adress';
 
 //ADMIN
 import AdminHeader from './Components/AdminComponent/AdminHeader';
@@ -18,15 +24,10 @@ import AdminProduct from './Components/AdminComponent/AdminProduct';
 import Kartha from './Components/AdminComponent/Kartha';
 import AdminAddProduct from './Components/AdminComponent/AdminAddProduct';
 import AdminViewUser from './Components/AdminComponent/AdminViewUser';
-import { useEffect, useState } from 'react';
-
-import { useContext } from 'react';
-import { userLoginResponse } from './Context/CreateContext';
-import Adress from './MainPages/UserMainPages/Adress';
-import OrderPlacedSuccess from './MainPages/UserMainPages/OrderPlacedSuccess';
-import OrderView from './MainPages/UserMainPages/OrderView';
+import GraphPage from './Components/AdminComponent/GraphPage';
 import AdminAddTrendingProduct from './Components/AdminComponent/AdminAddTrendingProduct';
 import AdminTrendingProduct from './Components/AdminComponent/AdminTrendingProduct';
+
 
 
 
@@ -103,7 +104,7 @@ function App() {
                 <Route path='/landing*' element={
                     <AdminlandingFun >
                      <Routes>
-                      <Route index element={<Kartha/>} />
+                      <Route index element={<GraphPage />} />
                       <Route path='allproduct' element={<AdminProduct />} />
                       <Route path='addproduct' element={<AdminAddProduct/>}/>
                       <Route path='viewuser' element={<AdminViewUser />} />

@@ -4,9 +4,10 @@ import { ToastContainer,toast } from 'react-toastify'
 import { BASE_URL } from '../../axios/baseURL'
 import AdminEditProduct from './AdminEditProduct'
 import { adminProducEditContext } from '../../Context/CreateContext';
+import { adminAddProductContext } from '../../Context/CreateContext'
 import { useContext } from 'react';
 function AdminProduct() {
-    
+    const {adminAddProductRespose,setAdminAddProductRespose}=useContext(adminAddProductContext)
     const {adminProducEditResponse,setAdminProducEditResponse}=useContext(adminProducEditContext)
     const[token,setToken]=useState("")
     const [productDataFromDB,setProductDataFromDB]=useState([])
@@ -22,7 +23,7 @@ function AdminProduct() {
     
     useEffect(()=>{
         adminGetAllProduct()
-    },[adminProducEditResponse])
+    },[adminProducEditResponse,adminAddProductRespose])
 
     useEffect(()=>{
         const adminToken=sessionStorage.getItem("token")

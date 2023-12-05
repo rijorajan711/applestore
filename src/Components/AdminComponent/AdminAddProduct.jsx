@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState,useContext } from 'react'
 import { ToastContainer,toast } from 'react-toastify'
 import { adminAddProductAPI } from '../../axios/allAPI/adminAPI'
-
+import { adminAddProductContext } from '../../Context/CreateContext'
 
 
 
 function AdminAddProduct() {
 
 const [token,setToken]=useState("")
+const {adminAddProductRespose,setAdminAddProductRespose}=useContext(adminAddProductContext)
 useEffect(()=>{
     
     if(sessionStorage.getItem("token")){
@@ -64,6 +65,8 @@ const productSubmit=async()=>{
                             title:"",description:"",category:"",price:"",uploadimages:""
                           
                           })
+
+                          setAdminAddProductRespose(result.data)
                            toast.warning(result.data)
                          }else if(result.response.status===501){
                              toast(result.response.data)

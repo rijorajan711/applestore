@@ -60,5 +60,14 @@ export const adminTrendingProductUpdationSubmitAPI=async(reqBody,reqHeader)=>{
       return await commonAPI("PUT",`${BASE_URL}/admin/admintrendingproductupdationsubmit`,reqBody,reqHeader)
 }
 
+export const getGraphDataAPI=async()=>{
+      return await commonAPI("GET",`${BASE_URL}/admin/getgraphdata`)
+}
+
+
+export const getGraphProductCategoryDataAPI=async()=>{
+      return await commonAPI("GET",`${BASE_URL}/admin/getproductgraphdata`)
+}
+
 
 
