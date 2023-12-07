@@ -28,7 +28,7 @@ export const addToCartSubmitAPI=async(reqBody,reqHeader)=>{
 }
 
 export const getCartProductsAPI=async(reqHeader)=>{
-   
+      console.log("getCartProductsAPI",reqHeader)
     return await commonAPI("GET",`${BASE_URL}/user/getcartproduct`,"",reqHeader)
 }
 
@@ -68,6 +68,11 @@ export const getAllOrderAPI=async(reqHeader)=>{
 
 export const userGetAllTrendingProductAPI=async()=>{
     return await commonAPI("GET",`${BASE_URL}/user/gettrendingproduct`,"","")
+}
+
+export const sendPastedTokenAPI=async(reqHeader)=>{
+    console.log("console.log from sendPastedTokenAPI",reqHeader)
+    return await commonAPI("POST",`${BASE_URL}/user/nodemailerpatsedtoken`,{},reqHeader)
 }
 
 

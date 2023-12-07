@@ -17,7 +17,7 @@ function VIewCart() {
     if (usertoken) {
       const reqHeader = {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${usertoken}`,
+        "Authorization": `Bearer ${usertoken}`,
       };
       const result = await getCartProductsAPI(reqHeader);
       if (result.status === 200) {

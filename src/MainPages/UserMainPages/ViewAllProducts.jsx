@@ -1,4 +1,4 @@
-import React, { useEffect, useState,useContext } from 'react'
+import React, { useEffect, useState,useContext, useCallback } from 'react'
 import CardForAllProducts from '../../Components/UsersComponents/CardForAllProducts'
 import { ToastContainer,toast} from 'react-toastify'
 import { userGetAllProductAPI, userGetCategoryProductAPI } from '../../axios/allAPI/userAPI'
@@ -64,8 +64,13 @@ const userGetcategoryProduct=async(filterKey)=>{
 
 
   useEffect(()=>{
-    userGetAllProduct()
+    if(category==="all"){
+    userGetAllProduct()}
   },[searchProductKey])
+
+  // useCallback(()=>{
+  //   userGetAllProduct()
+  // },[searchProductKey])
 
    const searchProduct=(e)=>{
     setSearchProductKey(e.target.value)

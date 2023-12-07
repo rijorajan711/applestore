@@ -22,18 +22,16 @@ function SignIn({signin}) {
         const result=await userSignInAPI(userDetails)
             // console.log("userrrrrrrrrrrrrrrrrrrrrrrrr",result)
         if(result.status===200){
-            toast.warning(`${result.data.username} is Signin successfully`)
-            setUserDetails({
-              username:"",email:"",password:""                                                    
-            })
-            navigate("/login")
-        }else if(result.response.status===501){
-            toast.warning(result.response.data)
-        }else if(result.response.status===401){
-            console.log(result.response.data)
+            // toast.warning(`${result.data.username} is Signin successfully`)
+            // setUserDetails({
+            //   username:"",email:"",password:""                                                    
+            // })
+            toast.warning(result.data)
+            navigate("/directiontogmail")
         }
         else{
-            toast.warning("Some internal Error !!!!!!")
+            toast.warning(result.response.data)
+            navigate("/signin")
         }
     }  else{
       toast.warning("Some internal Error !!!!!!")

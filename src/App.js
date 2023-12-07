@@ -27,6 +27,7 @@ import AdminViewUser from './Components/AdminComponent/AdminViewUser';
 import GraphPage from './Components/AdminComponent/GraphPage';
 import AdminAddTrendingProduct from './Components/AdminComponent/AdminAddTrendingProduct';
 import AdminTrendingProduct from './Components/AdminComponent/AdminTrendingProduct';
+import DirectionToGmail from './Components/UsersComponents/DirectionToGmail';
 
 
 
@@ -67,7 +68,7 @@ const AdminlandingFun = ({ children }) => (
 
 function App() {
  const [userSession,setUserSession]=useState("")
-
+const [adminSession,setAdminSession]=useState("")
   const {loginResponse,setLoginResponse}=useContext(userLoginResponse)
 
   useEffect(()=>{
@@ -92,6 +93,7 @@ function App() {
                 <Route path="orderview" element={userSession?<OrderView />:<SignIn />} />
                 <Route path='login' element={<SignIn />} />
                 <Route path='signin' element={<SignIn signin />} />
+                <Route path="directiontogmail" element={<DirectionToGmail />} />
               </Routes>
             </DefaultLayout>
 
@@ -110,6 +112,7 @@ function App() {
                       <Route path='viewuser' element={<AdminViewUser />} />
                       <Route path='trendingaddproduct' element={<AdminAddTrendingProduct/>}/>
                       <Route path='trendingallproduct' element={<AdminTrendingProduct />} />
+                    
                      </Routes>
                     </AdminlandingFun>
 
