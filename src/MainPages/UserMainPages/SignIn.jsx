@@ -13,19 +13,28 @@ function SignIn({signin}) {
   const [userDetails,setUserDetails]=useState({
     username:"",email:"",password:""
   })
+
+
+ 
   
   const userSignInSubmit=async()=>{
     const {username,email,password}=userDetails
-    if(!username || !email || !password){
+    if(!username || !email || !password ){
       toast.warning("Pleass fill the form completely")
-    }else if(username&&email&&password){
+    }
+
+   
+    
+    
+    else if(username&&email&&password){
+
+       
+        
+   
+
         const result=await userSignInAPI(userDetails)
-            // console.log("userrrrrrrrrrrrrrrrrrrrrrrrr",result)
         if(result.status===200){
-            // toast.warning(`${result.data.username} is Signin successfully`)
-            // setUserDetails({
-            //   username:"",email:"",password:""                                                    
-            // })
+       
             toast.warning(result.data)
             navigate("/directiontogmail")
         }
@@ -33,11 +42,17 @@ function SignIn({signin}) {
             toast.warning(result.response.data)
             navigate("/signin")
         }
-    }  else{
-      toast.warning("Some internal Error !!!!!!")
-  }
+      }  else{
+             
+        toast.warning("Some internal Error !!!!!!")
+        }
+      
+        }
+    
 
-  }
+         
+
+
 
 
   const userLoginSubmit=async()=>{
@@ -48,8 +63,8 @@ function SignIn({signin}) {
     }else if(email&&password){
        
       const result=await userLoginAPI(userDetails)
-      console.log("loooooooooooogggggg",result)
-      // console.log("userrrrrrrrrrrrrrrrrrrrrrrrr",result)
+      // console.log("loooooooooooogggggg",result)
+  
       if(result.status===200){
           sessionStorage.setItem("usertoken",result.data.usertoken)
           sessionStorage.setItem("username",result.data.username)
@@ -78,13 +93,15 @@ function SignIn({signin}) {
           
          { signin&&<input value={userDetails.username} onChange={(e)=>setUserDetails({...userDetails,username:e.target.value})} className='bg-white focus:outline-none w-[70%] h-[8%] rounded-lg text-center text-lg font-fourthStyle opacity-60 focus:opacity-90' placeholder='Name'></input>}
           <input value={userDetails.email} onChange={(e)=>setUserDetails({...userDetails,email:e.target.value})}  className='bg-white focus:outline-none w-[70%] h-[8%] rounded-lg text-center text-lg font-fourthStyle opacity-60 focus:opacity-90' placeholder='Email'></input>
+       
           <input value={userDetails.password} onChange={(e)=>setUserDetails({...userDetails,password:e.target.value})} className='bg-white focus:outline-none w-[70%] h-[8%] rounded-lg text-center text-lg font-fourthStyle opacity-60 focus:opacity-90' placeholder='Password'></input>
+          {userDetails.password.length>4?"":<p className='text-white text-lg'>password need atleast 5 character!!!</p>}
          { signin?
             <div className='flex  gap-10'>
-            <span className='font-thridStyle text-xl text-white'>If you already have an account please Click Login !!!!</span> <Link to={"/login"}  className='h-[100%] rounded-md w-[30%] bg-fuchsia-200 hover:bg-fuchsia-300'><button onClick={()=>setUserDetails({ username:"",email:"",password:""})} className='h-[100%] rounded-md w-[100%] '>Login</button></Link>  <button onClick={userSignInSubmit} className='h-[100%] rounded-md w-[30%] bg-fuchsia-200 hover:bg-fuchsia-300'>Submit</button>
+            <span className='font-thridStyle text-xl text-white'>If you already have an account please Click Login !!!!</span> <Link to={"/login"}  className='h-[100%] rounded-md w-[30%] bg-fuchsia-200 hover:bg-fuchsia-300'><button onClick={()=>setUserDetails({ username:"",email:"",password:""})} className='h-[100%] rounded-md w-[100%] '>Login</button></Link> {userDetails.password.length>4?<button onClick={userSignInSubmit} className='h-[100%] rounded-md w-[30%] bg-fuchsia-200 hover:bg-fuchsia-300'>Submit</button>:""}
             </div>:
             <div className='flex  gap-10'>
-            <span className='font-thridStyle text-xl text-white'>If you dont have an account please Click Sign In first !!!!</span> <Link to={"/signin"} className='h-[100%] rounded-md w-[30%] bg-fuchsia-200 hover:bg-fuchsia-300'><button onClick={()=>setUserDetails({ username:"",email:"",password:""})} className='h-[100%] rounded-md w-[100%] '>SignIn</button></Link> <button onClick={userLoginSubmit} className='h-[100%] rounded-md w-[30%] bg-fuchsia-200 hover:bg-fuchsia-300'>Submit</button>
+            <span className='font-thridStyle text-xl text-white'>If you dont have an account please Click Sign In first !!!!</span> <Link to={"/signin"} className='h-[100%] rounded-md w-[30%] bg-fuchsia-200 hover:bg-fuchsia-300'><button onClick={()=>setUserDetails({ username:"",email:"",password:""})} className='h-[100%] rounded-md w-[100%] '>SignIn</button></Link> {userDetails.password.length>4?<button onClick={userLoginSubmit} className='h-[100%] rounded-md w-[30%] bg-fuchsia-200 hover:bg-fuchsia-300'>Submit</button>:""}
             </div>
             }
         </div>

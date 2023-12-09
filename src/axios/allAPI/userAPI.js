@@ -19,16 +19,17 @@ export const userGetAllProductAPI=async(searhKey)=>{
 }
 
 export const userGetCategoryProductAPI=async(reqBody)=>{
-    console.log("INSIDE userGetCategoryProductAPI",reqBody)
+    // console.log("INSIDE userGetCategoryProductAPI",reqBody)
     return await commonAPI("POST",`${BASE_URL}/user/getproductcategory`,reqBody,"")
 }
 
 export const addToCartSubmitAPI=async(reqBody,reqHeader)=>{
+   
     return await commonAPI("PATCH",`${BASE_URL}/user/addtocart`,reqBody,reqHeader)
 }
 
 export const getCartProductsAPI=async(reqHeader)=>{
-      console.log("getCartProductsAPI",reqHeader)
+    //   console.log("getCartProductsAPI",reqHeader)
     return await commonAPI("GET",`${BASE_URL}/user/getcartproduct`,"",reqHeader)
 }
 
@@ -47,7 +48,7 @@ export const addToWishListSubmitAPI=async(reqBody,reqHeader)=>{
 }
 
 export const getWishlistProductsAPI=async(reqHeader)=>{
-     console.log("inside getWishlistProductsAPI")
+    //  console.log("inside getWishlistProductsAPI")
     return await commonAPI("GET",`${BASE_URL}/user/getwishlistproduct`,"",reqHeader)
 }
 
@@ -71,8 +72,20 @@ export const userGetAllTrendingProductAPI=async()=>{
 }
 
 export const sendPastedTokenAPI=async(reqHeader)=>{
-    console.log("console.log from sendPastedTokenAPI",reqHeader)
+    // console.log("console.log from sendPastedTokenAPI",reqHeader)
     return await commonAPI("POST",`${BASE_URL}/user/nodemailerpatsedtoken`,{},reqHeader)
 }
 
+export const getSingleProductAPI=async(reqBody)=>{
 
+    // console.log("product id from front end API",reqBody)
+    return await commonAPI("POST",`${BASE_URL}/user/getsingleproduct`,reqBody,"")
+}
+
+export const getCartCountAPI=async (reqHeader)=>{
+    return await commonAPI("GET",`${BASE_URL}/user/getcartcount`,"",reqHeader)
+}
+
+export const getWishlistCountAPI=async (reqHeader)=>{
+    return await commonAPI("GET",`${BASE_URL}/user/getwishlistcount`,"",reqHeader)
+}

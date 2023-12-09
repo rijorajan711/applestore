@@ -88,7 +88,7 @@ function  AdminEditTrendingProduct(product) {
   
                       const result=await adminTrendingProductUpdationSubmitAPI(reqBody,reqHeader)
                       if(result.status===200){
-                          console.log("edited successfully")
+                          // console.log("edited successfully")
                           setAdminTrendingProducEditResponse(result.data)
                           
                           handleClose()

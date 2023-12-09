@@ -5,12 +5,12 @@ import { userGetAllProductAPI, userGetCategoryProductAPI } from '../../axios/all
 import { useParams,Link } from 'react-router-dom'
 import { adminAddProductContext } from '../../Context/CreateContext'
 function ViewAllProducts() {
-  const {category}=useParams()
+  let {category}=useParams()
   const [searchProductKey,setSearchProductKey]=useState("")
   const {adminAddProductRespose,setAdminAddProductRespose}=useContext(adminAddProductContext)
 
 
-  console.log("near to parammmsss",category)
+  // console.log("near to parammmsss",category)
 
   const [productDataFromDB,setProductDataFromDB]=useState([])
 
@@ -21,7 +21,7 @@ function ViewAllProducts() {
   
     const result=await userGetAllProductAPI(searhKey)
     if(result.status===200){
-        console.log(result.data)
+        // console.log(result.data)
         setProductDataFromDB(result?.data)
     }else{
          toast.warning(result?.response?.data)
@@ -47,14 +47,14 @@ const userGetcategoryProduct=async(filterKey)=>{
 
   useEffect(()=>{
   
-    console.log("inside useeffect")
+    // console.log("inside useeffect")
     
     if(category==="all"){
       console.log("inside all product useeffect ")
       userGetAllProduct()
       
     }else if(category==="phone"||category==="earphone"||category==="lap"){
-      console.log("category useeffect")
+      // console.log("category useeffect")
       userGetcategoryProduct(category)
   
     }
@@ -73,6 +73,7 @@ const userGetcategoryProduct=async(filterKey)=>{
   // },[searchProductKey])
 
    const searchProduct=(e)=>{
+    
     setSearchProductKey(e.target.value)
     
   }

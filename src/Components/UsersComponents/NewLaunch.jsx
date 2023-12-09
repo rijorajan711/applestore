@@ -14,9 +14,9 @@ function NewLaunch() {
             const result=await userGetAllTrendingProductAPI()
             if(result.status===200){
                 // console.log("all data from ADminProduct.jsx",result.data)
-                setTrendingProductDataFromDB(result.data)
+                setTrendingProductDataFromDB(result?.data)
             }else{
-                 toast.warning(result.response.data)
+                 toast.warning(result?.response?.data)
             }
 
         }
@@ -44,7 +44,7 @@ function NewLaunch() {
              getAllTrendingProduct()
         },[])
 
-        console.log("newwwwwwwwwwwww Launch product",trendingProductDataFromDB)
+        // console.log("newwwwwwwwwwwww Launch product",trendingProductDataFromDB)
       
     return (
         <div className='flex flex-col justify-center items-center w-full'>

@@ -2,13 +2,18 @@ import React from 'react'
 import { BASE_URL } from '../../axios/baseURL'
 import { toast,ToastContainer } from "react-toastify";
 import { addToCartSubmitAPI,addToWishListSubmitAPI} from '../../axios/allAPI/userAPI';
+import { Link } from 'react-router-dom';
+import { addCartProductContext } from '../../Context/CreateContext';
+import { addWishlistProductContext } from "../../Context/CreateContext";
+import { useContext } from 'react';
 
 
 
 function CardForAllProducts(product) {
 
 
-
+ const {userAddCartProductResponse,setUserAddCartProductResponse}=useContext(addCartProductContext)
+ const {userAddWishlistProductResponse,setUserAddWishlistProductResponse}=useContext(addWishlistProductContext)
   const addToCartSubmit=async(productId)=>{
      const usertoken=sessionStorage.getItem("usertoken")
      if(usertoken){
@@ -20,9 +25,11 @@ function CardForAllProducts(product) {
             "Content-Type":"application/json",
              "Authorization":`Bearer ${usertoken}`
           }
+        
         const result=await addToCartSubmitAPI(reqBody,reqHeader) 
         if(result.status===200){
-          toast.warning(result.data)
+          toast.warning(result.data.message)
+          setUserAddCartProductResponse(result.data.updateresponse)
         }else{
           toast.warning(result.response.data)
         }
@@ -50,6 +57,8 @@ function CardForAllProducts(product) {
        const result=await addToWishListSubmitAPI(reqBody,reqHeader) 
        if(result.status===200){
          toast.warning(result.data)
+         setUserAddWishlistProductResponse(result.data)     
+         
        }else{
          toast.warning(result.response.data)
        }
@@ -65,13 +74,13 @@ function CardForAllProducts(product) {
   return (
     <>
 
-<div className='group h-[400px]  w-[250px] flex gap-5 flex-col bg-slate-100 rounded-lg shadow-2xl hover:scale-[1.01] duration-700'>
+<div className='group h-[400px] opacity-90  w-[300px] flex gap-5 flex-col bg-white rounded-lg shadow-2xl hover:scale-[1.01] duration-700'>
 
 
 
 {
 
-  product?.product?.uploadimages[0]?   <div className='relative max-h-[50%] min-h-[50%] rounded-lg  '>
+  product?.product?.uploadimages[0]?   <div className='relative max-h-[60%] min-h-[60%] rounded-lg  '>
   <img className='absolute max-h-full min-h-full w-full rounded-lg ' src={`${BASE_URL}/images/${product?.product?.uploadimages[0]}`}></img>
   <div onClick={()=>addToWishListSubmit(product?.product?._id)} className='absolute left-[5%] top-[5%] opacity-0 text-red-500 bg-slate-100 rounded-full h-[10%] flex justify-center items-center w-[10%] group-hover:opacity-100 group-hover:duration-1000 hover:cursor-pointer'><i class="fa-solid fa-heart text-xl"></i></div>
   <button onClick={()=>addToCartSubmit(product?.product?._id)} className='absolute bottom-0 translate-y-10  bg-slate-100  h-[20%] w-full opacity-0 text-slate-500 group-hover:translate-y-0 duration-200 group-hover:opacity-100 hover:bg-slate-300 text-xl font-semibold ' >Add To Cart</button>
@@ -87,12 +96,13 @@ function CardForAllProducts(product) {
 
 <div className='flex flex-col gap-3'>
 
-    <h1 className='pl-2 font-thridStyle text-2xl'>{product.product.title}</h1>
+    <h1 className='pl-2 font-thridStyle text-slate-500 text-2xl'>{product.product.title}</h1>
     <span className='pl-2 font-thridStyle text-2xl'></span>
 
-    <div className='max-h-16  overflow-hidden overflow-y-scroll'>{product.product.description}</div>
+    {/* <div className='max-h-16  overflow-hidden overflow-y-scroll'>{product.product.description}</div> */}
     
     <span className='pl-4 font-bold text-lg '>{`₹ ${product.product.price}`} </span>
+    <Link to={`/singleproduct/${product.product._id}`}><button  className=' w-full h-11 text-slate-500  duration-200  hover:bg-slate-300 text-xl font-semibold ' >More About</button></Link>
 
 </div>
 

@@ -23,7 +23,7 @@ const [adminProductDetails,setAdminProductDetails]=useState({
 const handleDiscription=(e)=>{
   setAdminProductDetails({...adminProductDetails,description:e.target.value})
                              }
-console.log("addproddductttt from state",adminProductDetails)
+// console.log("addproddductttt from state",adminProductDetails)
 
 const productSubmit=async()=>{
          

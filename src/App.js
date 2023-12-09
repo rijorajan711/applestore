@@ -1,6 +1,6 @@
 
 import './App.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route,Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 //USER
@@ -21,13 +21,15 @@ import AdminHeader from './Components/AdminComponent/AdminHeader';
 import AdminLogin from './MainPages/AdminMainPages/AdminLogin';
 import MainAdminLanding from './MainPages/AdminMainPages/MainAdminLanding';
 import AdminProduct from './Components/AdminComponent/AdminProduct';
-import Kartha from './Components/AdminComponent/Kartha';
+
 import AdminAddProduct from './Components/AdminComponent/AdminAddProduct';
 import AdminViewUser from './Components/AdminComponent/AdminViewUser';
 import GraphPage from './Components/AdminComponent/GraphPage';
 import AdminAddTrendingProduct from './Components/AdminComponent/AdminAddTrendingProduct';
 import AdminTrendingProduct from './Components/AdminComponent/AdminTrendingProduct';
 import DirectionToGmail from './Components/UsersComponents/DirectionToGmail';
+import SingleProduct from './Components/UsersComponents/SingleProduct';
+import { adminLoginResponseContext } from './Context/CreateContext';
 
 
 
@@ -70,11 +72,18 @@ function App() {
  const [userSession,setUserSession]=useState("")
 const [adminSession,setAdminSession]=useState("")
   const {loginResponse,setLoginResponse}=useContext(userLoginResponse)
+  const {adminLoginResponse,setAdminLoginResponse}=useContext(adminLoginResponseContext)
 
   useEffect(()=>{
     const usertoken=sessionStorage.getItem("usertoken")
     setUserSession(usertoken)
   },[loginResponse])
+
+
+  useEffect(()=>{
+    const admintoken=sessionStorage.getItem("token")
+    setAdminSession(admintoken)
+  },[adminLoginResponse])
  
   return (
     <div className="App ">
@@ -94,6 +103,8 @@ const [adminSession,setAdminSession]=useState("")
                 <Route path='login' element={<SignIn />} />
                 <Route path='signin' element={<SignIn signin />} />
                 <Route path="directiontogmail" element={<DirectionToGmail />} />
+                <Route path='singleproduct/:id' element={<SingleProduct/>}/>
+             
               </Routes>
             </DefaultLayout>
 
@@ -104,17 +115,17 @@ const [adminSession,setAdminSession]=useState("")
               <Routes>
                 <Route index element={<AdminLogin />} />
                 <Route path='/landing*' element={
-                    <AdminlandingFun >
+                  adminSession?<AdminlandingFun >
                      <Routes>
                       <Route index element={<GraphPage />} />
-                      <Route path='allproduct' element={<AdminProduct />} />
-                      <Route path='addproduct' element={<AdminAddProduct/>}/>
-                      <Route path='viewuser' element={<AdminViewUser />} />
-                      <Route path='trendingaddproduct' element={<AdminAddTrendingProduct/>}/>
-                      <Route path='trendingallproduct' element={<AdminTrendingProduct />} />
-                    
+                      <Route path='allproduct' element={adminSession?<AdminProduct />:<AdminLogin />} />
+                      <Route path='addproduct' element={adminSession?<AdminAddProduct/>:<AdminLogin />}/>
+                      <Route path='viewuser' element={adminSession?<AdminViewUser />:<AdminLogin />} />
+                      <Route path='trendingaddproduct' element={adminSession?<AdminAddTrendingProduct/>:<AdminLogin />}/>
+                      <Route path='trendingallproduct' element={adminSession?<AdminTrendingProduct />:<AdminLogin />} />
+                     
                      </Routes>
-                    </AdminlandingFun>
+                    </AdminlandingFun>:<AdminLogin />
 
               
                 }/>
@@ -123,8 +134,8 @@ const [adminSession,setAdminSession]=useState("")
             </AdminHeaderAndFooter>
 
           } />
-
-        </Routes>
+       
+         </Routes>
 
       </BrowserRouter>
 

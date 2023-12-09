@@ -1,10 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { adminLogInAPI } from '../../axios/allAPI/adminAPI'
 import { ToastContainer, toast } from 'react-toastify';
+import { adminLoginResponseContext } from '../../Context/CreateContext';
 import 'react-toastify/dist/ReactToastify.css';
 
 function AdminLogin() {
+  const {adminLoginResponse,setAdminLoginResponse}=useContext(adminLoginResponseContext)
   const navigate = useNavigate()
   //location for admin login data
   const [adminLoginInDetails, setAdminLoginInDetails] = useState({
@@ -24,6 +26,7 @@ function AdminLogin() {
         if (response.status === 200) {
           // console.log("aaaaaaaaaaaaa", response.data)
           sessionStorage.setItem("token", response.data.token)
+          setAdminLoginResponse(response.data)
           navigate("/admin/landing")
         } else {
           toast.info("Check Your Password And Email Mr.Admin");

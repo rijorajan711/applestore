@@ -2,11 +2,18 @@ import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import {Link} from "react-router-dom";
 import { userLoginResponse } from "../../Context/CreateContext";
+import { addCartProductContext } from "../../Context/CreateContext";
+import { addWishlistProductContext } from "../../Context/CreateContext";
 import { useContext } from "react";
 import { toast,ToastContainer } from "react-toastify";
+import { getCartCountAPI, getWishlistCountAPI } from "../../axios/allAPI/userAPI";
 function HomeNavbar() {
   const navigate=useNavigate()
+  const {userAddCartProductResponse,setUserAddCartProductResponse}=useContext(addCartProductContext)
+  const {userAddWishlistProductResponse,setUserAddWishlistProductResponse}=useContext(addWishlistProductContext)
   const {loginResponse,setLoginResponse}=useContext(userLoginResponse)
+  const [cartCountState,setCartCountState]=useState("")
+  const [WishlistCountState,setWishlistCountState]=useState("")
    const [User,setUser]=useState("")
     
    useEffect(()=>{
@@ -42,7 +49,51 @@ function HomeNavbar() {
     }
   }
 
-  
+  const getCartCount=async()=>{
+    const usertoken=sessionStorage.getItem("usertoken")
+        if(usertoken){
+          const reqHeader = {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${usertoken}`,
+        };
+               const result=await getCartCountAPI(reqHeader)
+               if(result.status==200){
+                setCartCountState(result.data)
+              }
+               else if(result.status==501){
+                 setCartCountState(result.response.data)
+               }}
+        else{
+          setCartCountState(0)
+        }
+  }
+
+    const getWishlistCount=async()=>{
+    const usertoken=sessionStorage.getItem("usertoken")
+        if(usertoken){
+          const reqHeader = {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${usertoken}`,
+        };
+               const result=await getWishlistCountAPI(reqHeader)
+               if(result.status==200){
+                setWishlistCountState(result.data)
+              }
+               else if(result.status==501){
+                 setWishlistCountState(result.response.data)
+               }}
+        else{
+          setWishlistCountState(0)
+        }
+  }
+
+  useEffect(()=>{
+    getCartCount()
+  },[loginResponse,userAddCartProductResponse])
+
+  useEffect(()=>{
+    getWishlistCount()
+  },[loginResponse,userAddWishlistProductResponse])
   return (
     <div
       className={`max-h-28 bg-zinc-700 opacity-75 w-full fixed  lg:p-14 flex justify-evenly items-center flex-initial  z-50`}
@@ -115,7 +166,7 @@ function HomeNavbar() {
         </button>
 
         <div className="lg:h-10 lg:w-10 bg-white rounded-full flex items-center justify-center text-2xl font-thridStyle">
-          4
+          {cartCountState?.cartcount?cartCountState?.cartcount:0}
         </div>
       </div>
       <div className="group lg:flex gap-2 flex-initial">
@@ -132,7 +183,7 @@ function HomeNavbar() {
 
     
         <div className="lg:h-10 lg:w-10 bg-white rounded-full flex items-center justify-center text-2xl font-thridStyle">
-          3
+        {WishlistCountState?.wishlistcount?WishlistCountState?.wishlistcount:0}
         </div>
 
 

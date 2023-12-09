@@ -20,13 +20,13 @@ function DirectionToGmail() {
                navigate("/login")
         }else{
                 toast.warning(result.response.data)
-                console.log("erorrrrrrrrr",result.response.data)
+                // console.log("erorrrrrrrrr",result.response.data)
                 navigate("/signin")
         }
 
         
     }
-    console.log("please give a tokennnn in frontttttt",typeof tokenPasted)
+    // console.log("please give a tokennnn in frontttttt",typeof tokenPasted)
 
   return (
     <div className='h-screen bg-slate-300 flex flex-col gap-5 pt-28 lg:pt-5 text-center sm:justify-center items-center'>

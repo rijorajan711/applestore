@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { ToastContainer,toast } from 'react-toastify'
 import { addToCartSubmitAPI, getWishlistProductsAPI,removeProductFromWishlistSubmitAPI } from '../../axios/allAPI/userAPI'
 import { BASE_URL } from '../../axios/baseURL'
+import { useContext } from 'react'
+import { addWishlistProductContext } from '../../Context/CreateContext'
+import { addCartProductContext } from '../../Context/CreateContext'
 
 function Wishlist() {
+  const {userAddCartProductResponse,setUserAddCartProductResponse}=useContext(addCartProductContext)
+  const {userAddWishlistProductResponse,setUserAddWishlistProductResponse}=useContext(addWishlistProductContext)  
   const [wishlistProductState,setWishlistProductState]=useState()
   const getWishlistProducts=async()=>{
     const usertoken=sessionStorage.getItem("usertoken")
@@ -15,7 +20,7 @@ function Wishlist() {
         const result=await getWishlistProductsAPI(reqHeader)
         if(result.status===200){
 
-             console.log("sssssssssssssssssssssssssssssss",result.data)
+            //  console.log("sssssssssssssssssssssssssssssss",result.data)
             setWishlistProductState(result.data)
         }
 
@@ -47,6 +52,8 @@ const removeProductFromWishlistSubmit=async(productId)=>{
        const result =await removeProductFromWishlistSubmitAPI(reqBody,reqHeader)
        
        if(result.status===200){
+
+          setUserAddWishlistProductResponse(result.data)
           getWishlistProducts()
        }else{
              toast.warning(result.response.data)
@@ -73,7 +80,8 @@ const addToCartSubmit=async(productId)=>{
        }
      const result=await addToCartSubmitAPI(reqBody,reqHeader) 
      if(result.status===200){
-       toast.warning(result.data)
+       toast.warning(result.data.message)
+       setUserAddCartProductResponse(result.data.updateresponse)
        removeProductFromWishlistSubmit(productId)
      }else{
        toast.warning(result.response.data)

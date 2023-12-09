@@ -33,7 +33,7 @@ function OrderView() {
     },[])
 
 
-console.log(orderState)
+// console.log(orderState)
   return (
     <div className='group min-h-screen w-[100%] flex-col flex-initial pt-[15%] sm:pt-[10%]'>
     

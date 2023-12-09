@@ -8,8 +8,11 @@ import {
 import { toast, ToastContainer } from "react-toastify";
 import { BASE_URL } from "../../axios/baseURL";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { addCartProductContext } from "../../Context/CreateContext";
 
 function VIewCart() {
+  const {userAddCartProductResponse,setUserAddCartProductResponse}=useContext(addCartProductContext)
   const [cartProductState, setCartProductState] = useState({});
 
   const getCartProducts = async () => {
@@ -21,7 +24,7 @@ function VIewCart() {
       };
       const result = await getCartProductsAPI(reqHeader);
       if (result.status === 200) {
-        setCartProductState(result.data);
+        setCartProductState(result?.data);
       }
     } else {
       toast.warning("You cant access Cart Plese login");
@@ -47,6 +50,7 @@ function VIewCart() {
       const result = await removeProductFromCartSubmitAPI(reqBody, reqHeader);
 
       if (result.status === 200) {
+        setUserAddCartProductResponse(result.data)
         getCartProducts();
       } else {
         toast.warning(result.response.data);
@@ -75,6 +79,7 @@ function VIewCart() {
         document.getElementById(productId).classList.remove("hidden");
         const result = await increDecreSubmitAPI(reqBody, reqHeader);
         if (result.status === 200) {
+          setUserAddCartProductResponse(result.data)
           getCartProducts();
         } else {
           toast.warning(result.response.data);

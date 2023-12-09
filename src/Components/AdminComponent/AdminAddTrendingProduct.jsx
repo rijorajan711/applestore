@@ -23,7 +23,7 @@ const [adminTrendingProductDetails,setAdminTrendingProductDetails]=useState({
 const handleDiscription=(e)=>{
   setAdminTrendingProductDetails({...adminTrendingProductDetails,description:e.target.value})
                              }
-console.log("addproddductttt from state",adminTrendingProductDetails)
+// console.log("addproddductttt from state",adminTrendingProductDetails)
 
 const trendingProductSubmit=async()=>{
          
