@@ -46,8 +46,8 @@ function AdminLogin() {
       <div className='mt-[10%]  w-[70%] h-[75%] rounded-3xl  flex flex-col  justify-center gap-5 items-center'>
 
 
-        <input type='text' onChange={(e) => setAdminLoginInDetails({ ...adminLoginInDetails, adminemail: e.target.value })} className='bg-white focus:outline-none w-[70%] h-[8%] rounded-lg text-center text-lg font-fourthStyle opacity-60 focus:opacity-90' placeholder='Email rijo@gmail.com'></input>
-        <input type='text' onChange={(e) => setAdminLoginInDetails({ ...adminLoginInDetails, password: e.target.value })} className='bg-white focus:outline-none w-[70%] h-[8%] rounded-lg text-center text-lg font-fourthStyle opacity-60 focus:opacity-90' placeholder='Password rijo1234'></input>
+        <input type='text' onChange={(e) => setAdminLoginInDetails({ ...adminLoginInDetails, adminemail: e.target.value })} className='bg-white focus:outline-none w-[70%] h-[8%] rounded-lg text-center text-lg font-fourthStyle opacity-60 focus:opacity-90' placeholder='Email : rijo@gmail.com'></input>
+        <input type='text' onChange={(e) => setAdminLoginInDetails({ ...adminLoginInDetails, password: e.target.value })} className='bg-white focus:outline-none w-[70%] h-[8%] rounded-lg text-center text-lg font-fourthStyle opacity-60 focus:opacity-90' placeholder='Password : rijo1234'></input>
 
         <div className='flex  gap-10'>
           <button onClick={loginSubmit} className='h-[50px] rounded-md w-[100px] bg-fuchsia-200 hover:bg-fuchsia-300'>Submit</button>
